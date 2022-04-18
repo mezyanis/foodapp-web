@@ -11,7 +11,7 @@ body{
 }
 
 nav{
-    background: violet;
+    background: linear-gradient(135deg, #ffec61, #f321d7);
     padding: 5px 20px;
 }
 
@@ -38,11 +38,7 @@ a:hover{
 }
 
 .logo{
-    font-size: 20px
-}
-
-.button.signUp{
-    border-bottom: 1px #444 solid;
+    font-size: 30px;
 }
 
 /*version mobile*/
@@ -52,19 +48,29 @@ a:hover{
     justify-content: space-between;
     align-items: center;
 }
+.toggle{
+    order:1;
+}
+.item.button{
+    order:2;
+}
+.item{
+    width: 100%;
+    text-align: center;
+    order:3;
+    display: none;
+}
 
-
-
-
-
-
+.item.active{
+    display: block;
+}
 
 .toggle{
     cursor: pointer;
 }
 
 .bars{
-    background: #999;
+    background: white;
     display:inline-block;
     height: 2px;
     position:relative;
@@ -72,7 +78,7 @@ a:hover{
 }
 
 .bars::before,.bars::after{
-    background: #999;
+    background: white;
     content:"";
     display:inline-block;
     height: 2px;
@@ -85,4 +91,91 @@ a:hover{
 }
 .bars::after{
     top:-5px;
+}
+
+
+a:hover{
+    color:#ddd;
+}
+
+
+/* Tablet Menu*/
+@media all and (min-width: 468px){
+    .menu{
+        justify-content: center;
+    }
+    .logo{
+        flex:1;
+    }
+    .item.button{
+        width: auto;
+        order: 1;
+        display: block;
+    }
+    
+    .toggle{
+        order: 2;
+    }
+    
+    button.signUp{
+        border: 0;
+    }
+    
+    .button a{
+        padding: 7px 15px;
+        background: linear-gradient(70deg, #ffec61, #f321d7);
+        border: 1px solid white;
+        border-radius: 50em;
+    }
+    
+    .button.signUp a{
+        background: transparent;
+    }
+    
+    .button a:hover{
+        transition:all .25s;
+    }
+    
+    .button:not(.signUp) a:hover{
+        background: linear-gradient(70deg,#f321d7, #ffec61);
+        border-color: white;
+    }
+
+    .button.signUp a:hover{
+        color:#ddd;
+    }
+}
+
+/* desktop */
+@media all and (min-width: 768px) {
+
+    .item{
+        display:block;
+        width: auto;
+    }
+    .toggle{
+        display:none;
+    }
+
+    .logo{
+        order: 0;
+    }
+
+    .item{
+        order:1;
+    }
+
+    .button{
+        order:2;
+    }
+
+    .menu li{
+        padding: 15px 10px;
+    }
+
+    .menu li.button{
+        padding-right: 0;
+    }
+
+
 }
