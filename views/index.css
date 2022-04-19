@@ -1,181 +1,176 @@
-
 /* affecte tout le contenue pour prendre tout l'espace*/
-*{
+
+* {
     box-sizing: border-box;
     padding: 0;
     margin: 0;
 }
 
-body{
+body {
     font-family: sans-serif;
+    background-image: url('./fond.jpeg');
 }
 
-nav{
+nav {
     background: linear-gradient(135deg, #ffec61, #f321d7);
     padding: 5px 20px;
 }
 
-ul{
+ul {
     list-style-type: none;
 }
 
-a{
+a {
     color: white;
     text-decoration: none;
 }
 
-a:hover{
+a:hover {
     text-decoration: underline;
 }
 
-.menu li{
+.menu li {
     font-size: 16px;
     padding: 15px 5px;
 }
 
-.menu li a{
+.menu li a {
     display: block;
 }
 
-.logo{
+.logo {
     font-size: 30px;
 }
 
+
 /*version mobile*/
-.menu{
-    display:flex;
+
+.menu {
+    display: flex;
     flex-wrap: wrap;
     justify-content: space-between;
     align-items: center;
 }
-.toggle{
-    order:1;
+
+.toggle {
+    order: 1;
 }
-.item.button{
-    order:2;
+
+.item.button {
+    order: 2;
 }
-.item{
+
+.item {
     width: 100%;
     text-align: center;
-    order:3;
+    order: 3;
     display: none;
 }
 
-.item.active{
+.item.active {
     display: block;
 }
 
-.toggle{
+.toggle {
     cursor: pointer;
 }
 
-.bars{
+.bars {
     background: white;
-    display:inline-block;
+    display: inline-block;
     height: 2px;
-    position:relative;
+    position: relative;
     width: 18px;
 }
 
-.bars::before,.bars::after{
+.bars::before,
+.bars::after {
     background: white;
-    content:"";
-    display:inline-block;
+    content: "";
+    display: inline-block;
     height: 2px;
-    position:absolute;
+    position: absolute;
     width: 18px;
 }
 
-.bars::before{
-    top:5px;
-}
-.bars::after{
-    top:-5px;
+.bars::before {
+    top: 5px;
 }
 
+.bars::after {
+    top: -5px;
+}
 
-a:hover{
-    color:#ddd;
+a:hover {
+    color: #ddd;
 }
 
 
 /* Tablet Menu*/
-@media all and (min-width: 468px){
-    .menu{
+
+@media all and (min-width: 468px) {
+    .menu {
         justify-content: center;
     }
-    .logo{
-        flex:1;
+    .logo {
+        flex: 1;
     }
-    .item.button{
+    .item.button {
         width: auto;
         order: 1;
         display: block;
     }
-    
-    .toggle{
+    .toggle {
         order: 2;
     }
-    
-    button.signUp{
+    button.signUp {
         border: 0;
     }
-    
-    .button a{
+    .button a {
         padding: 7px 15px;
         background: linear-gradient(70deg, #ffec61, #f321d7);
         border: 1px solid white;
         border-radius: 50em;
     }
-    
-    .button.signUp a{
+    .button.signUp a {
         background: transparent;
     }
-    
-    .button a:hover{
-        transition:all .25s;
+    .button a:hover {
+        transition: all .25s;
     }
-    
-    .button:not(.signUp) a:hover{
-        background: linear-gradient(70deg,#f321d7, #ffec61);
+    .button:not(.signUp) a:hover {
+        background: linear-gradient(70deg, #f321d7, #ffec61);
         border-color: white;
     }
-
-    .button.signUp a:hover{
-        color:#ddd;
+    .button.signUp a:hover {
+        color: #ddd;
     }
 }
 
-/* desktop */
-@media all and (min-width: 768px) {
 
-    .item{
-        display:block;
+/* desktop */
+
+@media all and (min-width: 768px) {
+    .item {
+        display: block;
         width: auto;
     }
-    .toggle{
-        display:none;
+    .toggle {
+        display: none;
     }
-
-    .logo{
+    .logo {
         order: 0;
     }
-
-    .item{
-        order:1;
+    .item {
+        order: 1;
     }
-
-    .button{
-        order:2;
+    .button {
+        order: 2;
     }
-
-    .menu li{
+    .menu li {
         padding: 15px 10px;
     }
-
-    .menu li.button{
+    .menu li.button {
         padding-right: 0;
     }
-
-
 }

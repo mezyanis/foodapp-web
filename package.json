@@ -1,0 +1,19 @@
+{
+    "name": "web-project",
+    "version": "1.0.0",
+    "description": "web project for proposing restaurant",
+    "main": "server.js",
+    "scripts": {
+        "test": "echo \"Error: no test specified\" && exit 1",
+        "start": "nodemon server.js"
+    },
+    "repository": {
+        "type": "git",
+        "url": "https://etulab.univ-amu.fr/m20039518/web-project.git"
+    },
+    "author": "Yanis Meziani & Warren Ahamada",
+    "license": "ISC",
+    "devDependencies": {
+        "express": "^4.17.3"
+    }
+}
