@@ -15,5 +15,8 @@
     "license": "ISC",
     "devDependencies": {
         "express": "^4.17.3"
+    },
+    "dependencies": {
+        "better-sqlite3": "^7.5.1"
     }
 }
