@@ -2,7 +2,7 @@ const Sqlite = require('better-sqlite3')
 
 let db = new Sqlite('db.sqlite')
 
-function create_db() {
+/*function create_db() {
     db.prepare('DROP TABLE IF EXISTS restaurants').run();
     db.prepare('DROP TABLE IF EXISTS opinions').run();
     db.prepare('DROP TABLE IF EXISTS users').run();
@@ -18,6 +18,6 @@ function create_db() {
         db.prepare(`INSERT INTO restaurants (name, adress, type, budget) VALUES ('otacos', 'marseille pardo', 'fast-food', '€' )`).run()
     }
     addData()
-}
+}*/
 
-create_db()
+//create_db()

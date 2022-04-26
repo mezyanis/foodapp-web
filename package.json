@@ -14,6 +14,10 @@
     "author": "Yanis Meziani & Warren Ahamada",
     "license": "ISC",
     "devDependencies": {
-        "express": "^4.17.3"
+        "express": "^4.17.3",
+        "mapbox": "^1.0.0-beta10"
+    },
+    "dependencies": {
+        "node-fetch": "^2.6.7"
     }
 }

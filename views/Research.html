@@ -1,34 +1,46 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
     <meta charset="UTF-8">
     <title>Title</title>
-    <link rel="stylesheet" href="Main Style.css">
+    <link rel="stylesheet" href="index.css">
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
     <script>
-        $(function(){
-            $(".toggle").on("click",function(){
-                if($(".item").hasClass("active")){
+        (function() {
+            $(".toggle").on("click", function() {
+                if ($(".item").hasClass("active")) {
                     $(".item").removeClass("active");
-                }
-                else{
+                } else {
                     $(".item").addClass("active");
                 }
             })
         })
     </script>
+
 </head>
+
 <body>
-<nav>
-    <ul class="menu">
-        <li><a class="logo" href="#">App Name</a></li>
-        <li><a class="item" href="#">Home</a> </li>
-        <li><a class="item" href="#">Research</a> </li>
-        <li><a class="item" href="#">Map</a> </li>
-        <li><a class="item button" href="#">Login</a></li>
-        <li><a class="item button signUp" href="#">Sign Up</a> </li>
-        <li class="toggle"><span class="bars"></span></li>
-    </ul>
-</nav>
+    <nav>
+        <ul class="menu">
+            <li><a class="logo" href="#">App Name</a></li>
+            <li><a class="item" href="#">Home</a> </li>
+            <li><a class="item" href="#">Research</a> </li>
+            <li><a class="item" href="#">Map</a> </li>
+            <li><a class="item button" href="#">Login</a></li>
+            <li><a class="item button signUp" href="#">Sign Up</a> </li>
+            <li class="toggle"><span class="bars"></span></li>
+        </ul>
+    </nav>
+
+    <div>
+        <form action="/search" method="">
+            <input type="text" name="adress" id="adress">
+            <input type="submit" value="go!">
+        </form>
+    </div>
+
+
 </body>
+
 </html>
