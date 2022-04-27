@@ -14,7 +14,7 @@ exports.return_restaurant = () => {
 
 // Connection method using username & password
 exports.login = (name, password) => {
-    let req = db.prepare('SELECT id FROM users WHERE name = ? AND password = ? ').get(name, password)
+    let req = db.prepare('SELECT id FROM users WHERE username = ? AND password = ? ').get(name, password)
     if (req == undefined) {
         return -1
     } else {
@@ -23,7 +23,7 @@ exports.login = (name, password) => {
 }
 
 //create a new user 
-exports.new_user = (name, password) => {
-    db.prepare(`INSERT INTO users (name, password) VALUES (?,?)`).run(name, password)
-    return db.prepare('SELECT id FROM users WHERE name = ? AND password = ? ').get(name, password).id
+exports.sign_in = (username, password) => {
+    db.prepare(`INSERT INTO users (username, password) VALUES (?,?)`).run(username, password)
+    return db.prepare('SELECT id FROM users WHERE username = ? AND password = ? ').get(username, password).id
 }

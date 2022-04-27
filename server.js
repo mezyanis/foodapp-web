@@ -3,6 +3,7 @@
 //dependences 
 const express = require("express")
 const mustache = require('mustache-express')
+const cookieSession = require('cookie-session')
 const fetch = require('node-fetch')
 const path = require('path');
 const model = require('./model')
@@ -11,6 +12,14 @@ let app = express()
 // parse form arguments in POST requests
 const bodyParser = require('body-parser');
 app.use(bodyParser.urlencoded({ extended: false }));
+
+//creation et configuration du cookie de session
+app.use(cookieSession({
+    secret: 'azerty',
+    keys: ['username', 'id']
+
+}))
+
 
 app.engine('html', mustache());
 app.set('view engine', 'html');
@@ -26,26 +35,17 @@ app.get("/", (req, res) => {
     //res.json(distance)*/
 })
 
+
+app.get('/')
 app.get('/login', (req, res) => {
-    res.render('login.html')
+    res.render('login')
 })
 
-app.get('/new_user', (req, res) => {
-    res.render('new_user')
+app.get('/signin', (req, res) => {
+    res.render('signin')
 })
 
-app.post('/login', (req, res) => {
-    let id = model.login(req.body.username, req.body.password)
-    if (id != -1) {
-        req.session.username = req.body.username
-        req.session.id = id
-        res.redirect('/')
-    } else {
-        res.redirect('/login')
-    }
-})
-
-app.get('/search', (req, res) => {
+app.get('/search', is_authenticated, (req, res) => {
     let user_adress = req.query.adress
     let resto = model.return_restaurant()
     console.log(req.query.adress);
@@ -95,14 +95,32 @@ app.get('/search', (req, res) => {
 
 })
 
+
+
+
+//POST routes
+
+app.post('/login', (req, res) => {
+    let id = model.login(req.body.username, req.body.password)
+    if (id != -1) {
+        req.session.username = req.body.username
+        req.session.id = id
+        res.redirect('/')
+    } else {
+        res.redirect('/login')
+    }
+})
+
 app.post('/logout', (req, res) => {
     req.session = null
     res.redirect('/')
 
 })
 
-app.post('/sign_in', (req, res) => {
-    req.session.id = model.new_user(req.body.username, req.body.password)
+
+
+app.post('/signin', (req, res) => {
+    req.session.id = model.sign_in(req.body.username, req.body.password)
     req.session.username = req.body.username
     res.redirect('/')
 
