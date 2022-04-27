@@ -14,17 +14,10 @@
     "author": "Yanis Meziani & Warren Ahamada",
     "license": "ISC",
     "devDependencies": {
-<<<<<<< HEAD
         "express": "^4.17.3",
         "mapbox": "^1.0.0-beta10"
     },
     "dependencies": {
         "node-fetch": "^2.6.7"
-=======
-        "express": "^4.17.3"
-    },
-    "dependencies": {
-        "better-sqlite3": "^7.5.1"
->>>>>>> 5a6fb229f26febb7fcb046a01cd38aa222411799
     }
 }

@@ -8,7 +8,7 @@
     <link rel="stylesheet" href="index.css">
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
     <script>
-        $(function() {
+        (function() {
             $(".toggle").on("click", function() {
                 if ($(".item").hasClass("active")) {
                     $(".item").removeClass("active");
@@ -23,33 +23,36 @@
 </head>
 
 <body>
-<header>
-    <nav>
-        <ul class="menu">
-            <li class="logo"><h1>ChooseEat</h1></li>
-            <li class="item"><a href="./index.html">Home</a></li>
-            <li class="item button"><a href="LogIn.html">Login</a></li>
-            <li class="item button signUp"><a href="./SignIn.html">Sign In</a></li>
-            <li class="toggle"><span class="bars"></span></li>
-        </ul>
-    </nav>
-</header>
+    <header>
+        <nav>
+            <ul class="menu">
+                <li class="logo">
+                    <h1>ChooseEat</h1>
+                </li>
+                <li class="item"><a href="./index.html">Home</a></li>
+                <li class="item button"><a href="LogIn.html">Login</a></li>
+                <li class="item button signUp"><a href="./SignIn.html">Sign In</a></li>
+                <li class="toggle"><span class="bars"></span></li>
+            </ul>
+        </nav>
+    </header>
 
 
 
-<div>
-    <div class="text">
-        <h1 class="slogan">Sex sex sex sex sex</h1>
-        <h3>Voulez vous coucher avec moi ?</h3>
+    <div>
+        <div class="text">
+            <h1 class="slogan">Sex sex sex sex sex</h1>
+            <h3>Voulez vous coucher avec moi !</h3>
+        </div>
+
+        <div class="request">
+            <form action="/search" method="">
+                <input class="champ" type="text" name="adress" id="adress">
+                <button class="App" type="submit">Let's go</button>
+            </form>
+        </div>
     </div>
-
-    <div class="request">
-        <form action="/search" method="">
-            <input class="champ" type="text" name="adress" id="adress">
-            <button class="App" type="submit">Let's go</button>
-        </form>
-    </div>
-</div>
 
 </body>
+
 </html>
