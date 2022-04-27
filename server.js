@@ -1,5 +1,5 @@
 "use strict"
-
+//npm start = lancer le server
 //dependences 
 const express = require("express")
 const mustache = require('mustache-express')
