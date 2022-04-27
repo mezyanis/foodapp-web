@@ -9,7 +9,7 @@
     <link rel="stylesheet" href="SignIn.css">
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
     <script>
-        $(function() {
+        (function() {
             $(".toggle").on("click", function() {
                 if ($(".item").hasClass("active")) {
                     $(".item").removeClass("active");
@@ -23,59 +23,63 @@
 
 
 </head>
+
 <body>
 
     <header>
         <nav>
             <ul class="menu">
-                <li class="logo"><h1>ChooseEat</h1></li>
-                <li class="item"><a href="./index.html">Home</a></li>
-                <li class="item button"><a href="LogIn.html">Login</a></li>
-                <li class="item button signUp"><a href="#">Sign In</a></li>
+                <li class="logo">
+                    <h1>ChooseEat</h1>
+                </li>
+                <li class="item"><a href="/">Home</a></li>
+                <li class="item button"><a href="/login">Login</a></li>
+                <li class="item button signUp"><a href="signin">Sign In</a></li>
                 <li class="toggle"><span class="bars"></span></li>
             </ul>
         </nav>
     </header>
 
-<div class="body">
+    <div class="body">
 
-    <!-- sign in part -->
+        <!-- sign in part -->
 
-    <div class="container">
-        <div class="forms">
-            <div class="form login">
-                <span class="title">Sign In</span>
+        <div class="container">
+            <div class="forms">
+                <div class="form login">
+                    <span class="title">Sign In</span>
 
-                <form action="#">
+                    <form action="/signin" method="post">
 
-                    <div class="input-field">
-                        <input type="text" placeholder="Enter your name" required>
-                        <i class="uil uil-user"></i>
-                    </div>
+                        <div class="input-field">
+                            <input type="text" name="username" placeholder="Enter your name" required>
+                            <i class="uil uil-user"></i>
+                        </div>
 
-                    <div class="input-field">
-                        <input type="text" placeholder="Enter your email" required>
-                        <i class="uil uil-envelope icon"></i>
-                    </div>
-
-
-                    <div class="input-field">
-                        <input type="password" class="password" placeholder="Enter your password" required>
-                        <i class="uil uil-lock icon"></i>
-                    </div>
-
-                    <div class="input-field button">
-                        <input type="button" value="Sign In Now">
-                    </div>
+                        <div class="input-field">
+                            <input type="text" placeholder="Enter your email" required>
+                            <i class="uil uil-envelope icon"></i>
+                        </div>
 
 
-                </form>
+                        <div class="input-field">
+                            <input type="password" name="password" class="password" placeholder="Enter your password" required>
+                            <i class="uil uil-lock icon"></i>
+                        </div>
+
+                        <div class="input-field button">
+                            <input type="submit" value="Sign In Now">
+                        </div>
+
+
+                    </form>
+                </div>
+
             </div>
-
         </div>
+
     </div>
 
-</div>
-
 </body>
+
 </html>

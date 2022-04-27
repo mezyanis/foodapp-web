@@ -29,10 +29,19 @@
                 <li class="logo">
                     <h1>ChooseEat</h1>
                 </li>
-                <li class="item"><a href="./index.html">Home</a></li>
-                <li class="item button"><a href="LogIn.html">Login</a></li>
-                <li class="item button signUp"><a href="./SignIn.html">Sign In</a></li>
+                <li class="item"><a href="/">Home</a></li>
+                <li class="item button"><a href="/login">Login</a></li>
+                <li class="item button signUp"><a href="/signin">Sign In</a></li>
+                {{#authenticated}}
+                <li class="item button signUp">
+                    <form action="/logout" method="post">
+                        <input type="submit" value="log out">
+                    </form>
+                </li>
+                {{/authenticated}}
+
                 <li class="toggle"><span class="bars"></span></li>
+                li
             </ul>
         </nav>
     </header>
