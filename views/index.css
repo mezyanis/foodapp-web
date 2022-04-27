@@ -1,12 +1,98 @@
+@import url('https://fonts.googleapis.com/css2?family=Pacifico&display=swap');
 
 div{
-    display: flex;
+    display: grid;
     align-items: center;
     justify-content: center;
-    height: 100vh;
 }
+    .text {
+        margin-top: 150px;
+        text-align: center;
+        font-family: 'Pacifico', cursive;
+        padding: 1px;
+        background: linear-gradient(120deg, #ffa237 0%, #ff1eec 100%);
+        background-clip: border-box;
+        -webkit-background-clip: text;
+        -webkit-text-fill-color: transparent;
+    }
+
+    .slogan {
+        font-size: 50px;
+    }
+
+    h3 {
+        font-size: 15px;
+    }
+
+    form {
+        display: grid;
+        padding: 20px 50px;
+        align-content: center;
+    }
+
+    #adress {
+        margin-bottom: 20px;
+        width: 400px;
+        height: 25px;
+        border-radius: 3px;
+        border: transparent;
+        box-shadow: 0 5px 10px rgba(0, 0, 0, 0.1);
+    }
+
+
+    /*Tablet Menu*/
+
+@media all and (min-width: 468px) {
+    .slogan {
+        font-size: 60px;
+    }
+
+    h3 {
+        font-size: 20px;
+    }
+
+    #adress {
+        margin-bottom: 20px;
+        width: 500px;
+        height: 25px;
+        border-radius: 3px;
+        border: transparent;
+        box-shadow: 0 5px 10px rgba(0, 0, 0, 0.1);
+    }
+
+    .App{
+        margin-left: 50%;
+    }
+}
+
+/* desktop */
+
+@media all and (min-width: 768px) {
+
+    .slogan {
+        font-size: 100px;
+    }
+
+    h3 {
+        font-size: 25px;
+    }
+
+    #adress {
+        margin-bottom: 20px;
+        width: 500px;
+        height: 25px;
+        border-radius: 3px;
+        border: transparent;
+        box-shadow: 0 5px 10px rgba(0, 0, 0, 0.1);
+    }
+
+
+}
+
 .App{
     position: relative;
+    width: 250px;
+    margin-left: 25%;
     border: 0;
     background: transparent;
     color:white;
