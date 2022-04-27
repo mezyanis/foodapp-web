@@ -17,7 +17,7 @@ app.get('/', (req, res) => {
 
 
 app.get("/search", async(req, res) => {
-    res.sendFile(path.join(__dirname + '/views/Research.html'))
+    res.sendFile(path.join(__dirname + '/views/index.html'))
 
     //retourne toute les infos sur l'adress passée en parametre
     const geocoding_options = {
