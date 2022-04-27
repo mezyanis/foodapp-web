@@ -32,13 +32,6 @@
     transition : height 0.2s ease;
 }
 
-.container.active .forms{
-    height: 600px;
-}
-.container.active .login{
-    margin-left: -50%;
-
-}
 .container .form{
     width: 50%;
     padding: 30px;
