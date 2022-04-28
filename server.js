@@ -1,11 +1,11 @@
 "use strict"
 //npm start = lancer le server
 //dependences 
+
 const express = require("express")
-const mustache = require('mustache-express')
+let mustache = require('mustache-express')
 const cookieSession = require('cookie-session')
 const fetch = require('node-fetch')
-const path = require('path');
 const model = require('./model')
 let app = express()
 
@@ -20,25 +20,27 @@ app.use(cookieSession({
 
 }))
 
+app.use(authenticatedView)
 
 app.engine('html', mustache());
 app.set('view engine', 'html');
 app.set('views', './views');
 
 
-app.use(express.static('views'))
+
+app.use(express.static('static'))
 
 app.get("/", (req, res) => {
-    res.sendFile(path.join(__dirname + '/views/index.html'))
-
-    //console.log("1");
-    //res.json(distance)*/
+    res.render('index', { user: res.locals.user, authenticated: res.locals.authenticated })
 })
 
 
-app.get('/')
 app.get('/login', (req, res) => {
     res.render('login')
+})
+
+app.get('/newRestaurant', is_authenticated, (req, res) => {
+    res.render('newRestaurant')
 })
 
 app.get('/signin', (req, res) => {
@@ -102,27 +104,48 @@ app.get('/search', is_authenticated, (req, res) => {
 
 app.post('/login', (req, res) => {
     let id = model.login(req.body.username, req.body.password)
-    if (id != -1) {
+    console.log(req.body);
+    if (id !== -1) {
         req.session.username = req.body.username
         req.session.id = id
         res.redirect('/')
+        console.log("u'r logged in");
+        console.log(req.session);
     } else {
         res.redirect('/login')
     }
 })
 
 app.post('/logout', (req, res) => {
+
     req.session = null
+    console.log("u'r outtt");
     res.redirect('/')
 
 })
 
+app.post('/newRestaurant', (req, res) => {
+    let restaurant_adress = req.body.adress + ',' + req.body.code + ',' + req.body.ville
+    let restaurant_result = model.newRestaurant(req.body.name, restaurant_adress, req.body.type, req.body.budget)
+
+    if (restaurant_result == -1) {
+        res.render("newRestaurant")
+    } else {
+        res.redirect('/')
+    }
+})
 
 
 app.post('/signin', (req, res) => {
-    req.session.id = model.sign_in(req.body.username, req.body.password)
-    req.session.username = req.body.username
-    res.redirect('/')
+    let signin_result = model.sign_in(req.body.username, req.body.mail, req.body.password)
+    if (signin_result == -1) {
+        res.render("signin", { data: "Cet utilisateur existe deja" })
+    } else {
+        req.session.id = signin_result
+        req.session.username = req.body.username
+        res.redirect('/')
+    }
+
 
 })
 
@@ -132,7 +155,6 @@ app.post('/signin', (req, res) => {
 //middlewares 
 function is_authenticated(req, res, next) {
     if (req.session.id == undefined || req.session.id == null) {
-        console.log(req.session);
         res.writeHead(401)
         res.end('Accès non autorisé')
         return
@@ -140,7 +162,7 @@ function is_authenticated(req, res, next) {
     next()
 }
 
-function authicatedView(req, res, next) {
+function authenticatedView(req, res, next) {
     res.locals = {
         authenticated: false,
         name: ''
@@ -150,8 +172,8 @@ function authicatedView(req, res, next) {
         res.locals.authenticated = true
         res.locals.name = req.session.username
     }
-    console.log('loc', res.locals);
-    console.log('ses', req.session);
+    //console.log('loc', res.locals);
+    //console.log('ses', req.session);
     next()
 }
 

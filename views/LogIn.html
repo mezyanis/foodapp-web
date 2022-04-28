@@ -1,77 +1,38 @@
-<!DOCTYPE html>
-<html lang="en">
+{{>navbar}}
 
-<head>
-    <meta charset="UTF-8">
-    <title>Resto App</title>
-    <link rel="stylesheet" href="Navbar.css">
-    <link rel="stylesheet" href="https://unicons.iconscout.com/release/v4.0.0/css/line.css">
-    <link rel="stylesheet" href="SignIn.css">
-    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
-    <script>
-        (function() {
-            $(".toggle").on("click", function() {
-                if ($(".item").hasClass("active")) {
-                    $(".item").removeClass("active");
-                } else {
-                    $(".item").addClass("active");
-                }
-            })
-        })
-    </script>
+<link rel="stylesheet" href="signin.css">
+<div class="body">
+
+    <!-- log in part -->
+    <div class="container">
+        <div class="forms">
+            <div class="form login">
+                <span class="title">Login</span>
+
+                <form action="/login" method="post">
+
+                    <div class="input-field">
+                        <input type="text" placeholder="Enter your username" name="username" required>
+                        <i class="uil uil-envelope icon"></i>
+                    </div>
 
 
+                    <div class="input-field">
+                        <input type="password" class="password" name="password" placeholder="Enter your password" required>
+                        <i class="uil uil-lock icon"></i>
+                    </div>
 
-</head>
-
-<body>
-
-    <header>
-        <nav>
-            <ul class="menu">
-                <li class="logo">
-                    <h1>ChooseEat</h1>
-                </li>
-                <li class="item"><a href="/">Home</a></li>
-                <li class="item button"><a href="/login">Login</a></li>
-                <li class="item button signUp"><a href="/signin">Sign In</a></li>
-                <li class="toggle"><span class="bars"></span></li>
-            </ul>
-        </nav>
-    </header>
-
-    <div class="body">
-
-        <!-- log in part -->
-        <div class="container">
-            <div class="forms">
-                <div class="form login">
-                    <span class="title">Login</span>
-
-                    <form action="/login" method="post">
-
-                        <div class="input-field">
-                            <input type="text" placeholder="Enter your email" required>
-                            <i class="uil uil-envelope icon"></i>
-                        </div>
+                    <div class="input-field button">
+                        <input type="submit" value="Login Now">
+                    </div>
 
 
-                        <div class="input-field">
-                            <input type="password" class="password" placeholder="Enter your password" required>
-                            <i class="uil uil-lock icon"></i>
-                        </div>
-
-                        <div class="input-field button">
-                            <input type="submit" value="Login Now">
-                        </div>
-
-
-                    </form>
-                </div>
-
+                </form>
             </div>
+
         </div>
     </div>
+</div>
 
 </body>
 

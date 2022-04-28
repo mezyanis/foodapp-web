@@ -1,0 +1,52 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <title>Resto App</title>
+    <link rel="stylesheet" href="navbar.css">
+
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
+    <script>
+        (function() {
+            $(".toggle").on("click", function() {
+                if ($(".item").hasClass("active")) {
+                    $(".item").removeClass("active");
+                } else {
+                    $(".item").addClass("active");
+                }
+            })
+        })
+    </script>
+
+
+</head>
+
+<body>
+    <header>
+        <nav>
+            <ul class="menu">
+                <li class="logo">
+                    <h1>ChooseEat</h1>
+                </li>
+                <li class="item"><a href="/">Home</a></li>
+
+                {{^authenticated}}
+                <li class="item button"><a href="/login">Login</a></li>
+
+                <li class="item button signUp"><a href="/signin">Sign In</a></li>
+                {{/authenticated}} {{#authenticated}}
+
+                <li class="item button"><a href="/newRestaurant">Add Restaurant</a></li>
+                <form action="/logout" method="post">
+                    <li class="item button">
+                        <input type="submit" value="log out">
+                    </li>
+                </form>
+
+                {{/authenticated}}
+
+                <li class="toggle"><span class="bars"></span></li>
+            </ul>
+        </nav>
+    </header>

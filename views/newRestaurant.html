@@ -1,0 +1,42 @@
+{{>navbar}}
+
+<link rel="stylesheet" href="signin.css">
+<div class="container">
+    <div class="forms">
+        <div class="form login">
+            <span class="title">New Restaurant</span>
+
+            <div class="request">
+                <form action="/newRestaurant" method="post">
+                    <input type="text" name="name" id="name" required>
+                    <input type="text" name="adress" id="adress" required>
+                    <input type="number" name="code" id="code" required>
+                    <input type="text" name="ville" id="ville" required>
+
+
+                    <input type="text" name="type" id="type" required>
+
+                    <!--   <input type="range" name="budget" id="budget" min="1" max="3">      -->
+
+                    <select name="budget">
+                    <option value="€"> -15€ le menu</option>
+                    <option value="€€">15-35€ le menu</option>
+                    <option value="€€€">+35 le menu</option>
+                </select>
+                    <input type="submit" value="ajouter">
+
+                </form>
+            </div>
+        </div>
+    </div>
+</div>
+
+<style>
+    input[type=number]::-webkit-inner-spin-button,
+    input[type=number]::-webkit-outer-spin-button {
+        -webkit-appearance: none;
+        -moz-appearance: none;
+        appearance: none;
+        margin: 0;
+    }
+</style>

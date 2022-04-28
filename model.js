@@ -13,8 +13,8 @@ exports.return_restaurant = () => {
 
 
 // Connection method using username & password
-exports.login = (name, password) => {
-    let req = db.prepare('SELECT id FROM users WHERE username = ? AND password = ? ').get(name, password)
+exports.login = (username, password) => {
+    let req = db.prepare('SELECT id FROM users WHERE username = ? AND password = ? ').get(username, password)
     if (req == undefined) {
         return -1
     } else {
@@ -23,7 +23,19 @@ exports.login = (name, password) => {
 }
 
 //create a new user 
-exports.sign_in = (username, password) => {
-    db.prepare(`INSERT INTO users (username, password) VALUES (?,?)`).run(username, password)
-    return db.prepare('SELECT id FROM users WHERE username = ? AND password = ? ').get(username, password).id
+exports.sign_in = (username, mail, password) => {
+    let req = db.prepare('SELECT id FROM users WHERE username = ? AND password = ? ').get(username, password)
+    if (req == undefined) {
+        db.prepare(`INSERT INTO users (username, mail, password) VALUES (?,?,?)`).run(username, mail, password)
+        return db.prepare('SELECT id FROM users WHERE username = ? AND password = ? ').get(username, password).id
+    } else return -1
+
+}
+
+exports.newRestaurant = (name, adress, type, budget) => {
+    let req = db.prepare(`SELECT id FROM restaurants WHERE name = $name AND adress LIKE  '% $adress %' `).get({ name: name, adress: adress })
+    if (req == undefined) {
+        db.prepare(`INSERT INTO restaurants (name, adress, type, budget) VALUES (?,?,?,?)`).run(name, adress, type, budget)
+        return 1
+    } else return -1
 }
