@@ -1,25 +1,26 @@
 const Sqlite = require('better-sqlite3')
-
+const bcrypt = require('bcryptjs')
 let db = new Sqlite('db.sqlite')
 
 
 
 exports.return_restaurant = () => {
-    let data = db.prepare("SELECT adress FROM restaurants").all()
+    let data = db.prepare("SELECT * FROM restaurants").all()
     let random_index = Math.floor(Math.random() * data.length)
-    console.log(data.length, " ", random_index, data[random_index]);
     return data[random_index]
 }
 
 
+
 // Connection method using username & password
 exports.login = (username, password) => {
-    let req = db.prepare('SELECT id FROM users WHERE username = ? AND password = ? ').get(username, password)
-    if (req == undefined) {
-        return -1
+    let db_password = db.prepare('SELECT password FROM users WHERE username = ?').get(username)
+    if (db_password !== undefined && bcrypt.compareSync(password, db_password.password)) {
+        return db.prepare('SELECT id FROM users WHERE username = ? AND password = ? ').get(username, db_password.password).id
     } else {
-        return req.id
+        return -1
     }
+
 }
 
 //create a new user 
@@ -32,6 +33,7 @@ exports.sign_in = (username, mail, password) => {
 
 }
 
+//add a new restaurant
 exports.newRestaurant = (name, adress, type, budget) => {
     let req = db.prepare(`SELECT id FROM restaurants WHERE name = $name AND adress LIKE  '% $adress %' `).get({ name: name, adress: adress })
     if (req == undefined) {
