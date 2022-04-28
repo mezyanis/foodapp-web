@@ -1,4 +1,6 @@
 # Web project
+0-15 : € \
+15-35 : €€ \
+35+ : €€€
 
-Site web qui propose un restaurant au utilisateurs
 

@@ -1,10 +1,10 @@
 "use strict"
 //npm start = lancer le server
-//dependences 
+//dependences
+//test
 
 const express = require("express")
-const bcrypt = require('bcryptjs')
-const mustache = require('mustache-express')
+let mustache = require('mustache-express')
 const cookieSession = require('cookie-session')
 const fetch = require('node-fetch')
 const model = require('./model')
@@ -51,6 +51,7 @@ app.get('/signin', (req, res) => {
 app.get('/search', is_authenticated, (req, res) => {
     let user_adress = req.query.adress
     let resto = model.return_restaurant()
+    console.log(req.query.adress);
 
     if (user_adress != '' && user_adress != undefined) {
         (async() => {
@@ -62,6 +63,7 @@ app.get('/search', is_authenticated, (req, res) => {
             //retourne toute les données sur la restaurant 
             let resto_data = await getGeoCode(resto.adress)
 
+            console.log(user_data);
 
 
             let user_coord = user_data.results[0].location
@@ -81,15 +83,9 @@ app.get('/search', is_authenticated, (req, res) => {
             let res_distance = await fetch(api_distance, dist_options)
             let distance = await res_distance.json()
 
-            res.render('restaurant', {
-                name: resto.name,
-                adress: resto.adress,
-                type: resto.type,
-                budget: resto.budget,
-                duration: (distance.durations[0][0] / 60),
-                distance: (distance.distances / 1000)
+            console.log(distance);
 
-            })
+            res.render('restaurant', { distance: distance })
         })()
 
 
@@ -109,10 +105,13 @@ app.get('/search', is_authenticated, (req, res) => {
 
 app.post('/login', (req, res) => {
     let id = model.login(req.body.username, req.body.password)
+    console.log(req.body);
     if (id !== -1) {
         req.session.username = req.body.username
         req.session.id = id
         res.redirect('/')
+        console.log("u'r logged in");
+        console.log(req.session);
     } else {
         res.redirect('/login')
     }
@@ -121,6 +120,7 @@ app.post('/login', (req, res) => {
 app.post('/logout', (req, res) => {
 
     req.session = null
+    console.log("u'r outtt");
     res.redirect('/')
 
 })
@@ -138,9 +138,8 @@ app.post('/newRestaurant', (req, res) => {
 
 
 app.post('/signin', (req, res) => {
-    let password = passwwordCrypt(req.body.password)
-    let signin_result = model.sign_in(req.body.username, req.body.mail, password)
-    if (signin_result == -1) {
+    let signin_result = model.sign_in(req.body.username, req.body.mail, req.body.password)
+    if (signin_result === -1) {
         res.render("signin", { data: "Cet utilisateur existe deja" })
     } else {
         req.session.id = signin_result
@@ -156,7 +155,7 @@ app.post('/signin', (req, res) => {
 
 //middlewares 
 function is_authenticated(req, res, next) {
-    if (req.session.id == undefined || req.session.id == null) {
+    if (req.session.id === undefined || req.session.id == null) {
         res.writeHead(401)
         res.end('Accès non autorisé')
         return
@@ -170,7 +169,7 @@ function authenticatedView(req, res, next) {
         name: ''
     }
 
-    if (req.session.id != undefined && req.session.id != null) {
+    if (req.session.id !== undefined && req.session.id != null) {
         res.locals.authenticated = true
         res.locals.name = req.session.username
     }
@@ -194,21 +193,7 @@ let getGeoCode = async(adress) => {
 
 
 }
+app.listen(8000, () => { console.log("server is running.."); })
 
 
-let passwwordCrypt = (password) => {
-    try {
-        let salt = bcrypt.genSaltSync()
-        let hash = bcrypt.hashSync(password, salt)
-        return hash
-    } catch (error) {
-        console.log(error);
-    }
 
-}
-
-
-let passwordCompare = (password) => {
-
-}
-app.listen(3000, () => { console.log("server is running.."); })
