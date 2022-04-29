@@ -4,13 +4,13 @@
 
 const express = require("express")
 const bcrypt = require('bcryptjs')
-const mustache = require('mustache-express')
 const cookieSession = require('cookie-session')
 const fetch = require('node-fetch')
 const model = require('./model')
 let app = express()
 
-// parse form arguments in POST requests
+let restaurant_data = {}
+    // parse form arguments in POST requests
 const bodyParser = require('body-parser');
 app.use(bodyParser.urlencoded({ extended: false }));
 
@@ -23,9 +23,9 @@ app.use(cookieSession({
 
 app.use(authenticatedView)
 
-app.engine('html', mustache());
-app.set('view engine', 'html');
-app.set('views', './views');
+//app.engine('html', mustache());
+app.set('view engine', 'ejs');
+//app.set('views', './views');
 
 
 
@@ -48,21 +48,25 @@ app.get('/signin', (req, res) => {
     res.render('signin')
 })
 
+app.get('/restaurant', (req, res) => {
+    res.render('restaurant', { data: restaurant_data })
+
+})
+
 app.get('/search', is_authenticated, (req, res) => {
     let user_adress = req.query.adress
-    let resto = model.return_restaurant()
+    let resto = model.random_restaurant()
 
     if (user_adress != '' && user_adress != undefined) {
         (async() => {
 
-            //retourne toute les infos sur l'adress passée en parametre
-            let user_data = await getGeoCode(user_adress)
 
+            //Retourne les données de l'adresse de l'utilisateur et celle du restaurant 
 
-            //retourne toute les données sur la restaurant 
-            let resto_data = await getGeoCode(resto.adress)
-
-
+            let [user_data, resto_data] = await Promise.all([
+                getGeoCode(user_adress),
+                getGeoCode(resto.adress)
+            ]);
 
             let user_coord = user_data.results[0].location
             let resto_coord = resto_data.results[0].location
@@ -81,15 +85,20 @@ app.get('/search', is_authenticated, (req, res) => {
             let res_distance = await fetch(api_distance, dist_options)
             let distance = await res_distance.json()
 
-            res.render('restaurant', {
+            restaurant_data = {
                 name: resto.name,
                 adress: resto.adress,
                 type: resto.type,
                 budget: resto.budget,
                 duration: (distance.durations[0][0] / 60),
-                distance: (distance.distances / 1000)
+                distance: (distance.distances / 1000),
+                comments: displayComments(resto.id)
+            }
 
-            })
+
+            //console.log(restaurant_data.comments);
+            res.redirect('/restaurant')
+
         })()
 
 
@@ -102,6 +111,12 @@ app.get('/search', is_authenticated, (req, res) => {
 
 })
 
+app.get('/logout', (req, res) => {
+
+    req.session = null
+    res.redirect('/')
+
+})
 
 
 
@@ -118,12 +133,6 @@ app.post('/login', (req, res) => {
     }
 })
 
-app.get('/logout', (req, res) => {
-
-    req.session = null
-    res.redirect('/')
-
-})
 
 app.post('/newRestaurant', (req, res) => {
     let restaurant_adress = req.body.adress + ',' + req.body.code + ',' + req.body.ville
@@ -151,6 +160,18 @@ app.post('/signin', (req, res) => {
 
 })
 
+app.post('/comment', (req, res) => {
+    let resto_id = model.get_restaurant(restaurant_data.name)
+    let liked = req.body.like === 'on' ? 1 : 0
+    model.comment(req.body.comment, liked, resto_id.id, req.session.id)
+    restaurant_data.comments = displayComments(resto_id.id)
+    res.render('restaurant', { data: restaurant_data })
+
+
+
+
+
+})
 
 
 
@@ -189,12 +210,30 @@ let getGeoCode = async(adress) => {
     };
 
     let api_url = `https://trueway-geocoding.p.rapidapi.com/Geocode?address=${adress}&language=en`
-    let response = await fetch(api_url, options)
-    return await response.json()
-
+    return fetch(api_url, options).then(response => response.json())
 
 }
 
+let displayComments = (id) => {
+    let req = model.get_comment(id)
+    let comments = []
+
+    console.log('ahlil');
+    //console.log("req", req);
+
+    for (let i = 0; i < req.length; i++) {
+        comments.push({
+            comment_content: req[i].comment,
+            like: req[i].like
+        })
+
+    }
+
+    //console.log("commetns", comments);
+
+    return comments
+
+}
 
 let passwwordCrypt = (password) => {
     try {

@@ -31,19 +31,19 @@
                 </li>
                 <li class="item"><a href="/">Home</a></li>
 
-                {{^authenticated}}
-                <li class="item button"><a href="/login">Login</a></li>
+                <% if (!authenticated) {%>
+                    <li class="item button"><a href="/login">Login</a></li>
 
-                <li class="item button signUp"><a href="/signin">Sign In</a></li>
-                {{/authenticated}} {{#authenticated}}
+                    <li class="item button signUp"><a href="/signin">Sign In</a></li>
+                    <% }else { %>
 
-                <li class="item button"><a href="/newRestaurant">Add Restaurant</a></li>
+                        <li class="item button"><a href="/newRestaurant">Add Restaurant</a></li>
 
-                <li class="item button signUp"><a href="/logout">Log Out</a></li>
+                        <li class="item button signUp"><a href="/logout">Log Out</a></li>
 
-                {{/authenticated}}
+                        <% } %>
 
-                <li class="toggle"><span class="bars"></span></li>
+                            <li class="toggle"><span class="bars"></span></li>
             </ul>
         </nav>
     </header>

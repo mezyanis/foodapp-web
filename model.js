@@ -4,12 +4,16 @@ let db = new Sqlite('db.sqlite')
 
 
 
-exports.return_restaurant = () => {
+exports.random_restaurant = () => {
     let data = db.prepare("SELECT * FROM restaurants").all()
     let random_index = Math.floor(Math.random() * data.length)
     return data[random_index]
 }
 
+
+exports.get_restaurant = (name) => {
+    return db.prepare('SELECT id FROM restaurants WHERE name = ?').get(name)
+}
 
 
 // Connection method using username & password
@@ -40,4 +44,16 @@ exports.newRestaurant = (name, adress, type, budget) => {
         db.prepare(`INSERT INTO restaurants (name, adress, type, budget) VALUES (?,?,?,?)`).run(name, adress, type, budget)
         return 1
     } else return -1
+}
+
+
+//add a opinion
+
+exports.comment = (comment, like, restaurant_id, user_id) => {
+    db.prepare(`INSERT INTO opinions (comment, like, restaurant_id, user_id) VALUES (?,?,?,?)`).run(comment, like, restaurant_id, user_id)
+}
+
+
+exports.get_comment = (restaurant_id) => {
+    return db.prepare('SELECT * FROM opinions WHERE restaurant_id = ?').all(restaurant_id)
 }
