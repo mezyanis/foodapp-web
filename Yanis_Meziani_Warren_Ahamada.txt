@@ -1,0 +1,33 @@
+Voici ChooseEat la plateform qui vous propose un restaurant en cas de manque d'inspiration.
+
+il vous faudra juste inserer votre adresse et Pouf! un restaurant vous est propos avec toute les infos pratiques et les commentaires des autres utilisateurs.
+
+Pour résoudre le problème d’indécision, le principe de notre site est de proposer un restaurant aléatoire dans un périmètre autour du client. Ainsi il pourra, s’il le souhaite, s’y rendre et déguster un bon plat. 
+Le site sera donc participatif, chaque utilisateur ayant un compte pourra ajouter des restaurants, liker et commenter. 
+Pour la proposition du restaurant, celle-ci se fera aléatoirement grâce à notre algorithme d'équiprobabilité (mais qui, si possible, se fera plus tard sur la base d’un algorithme de pertinence (like/prix/com)), pour la génération l’utilisateur pourra aussi intégrer certains paramètres tel que le radius de la recherche, le budget du restaurant et type.
+ 
+Pour les données du sites elles seront gérées au sein de bases de données relationnels:
+1-Pour les restaurants avec les colonnes id, nom, adresse, budget, type
+2-Pour les utilisateurs avec les colonnes id, pseudo, localisation, mail, mot de passe qui sont eux crypté pour ameliorer la securité de chaque compte
+3-Pour la qualité du restaurant avec les colonnes id, nom (qui réfère au restaurant en question),utilisateur (qui réfère à l’utilisateur qui à laissé son avis), la note (de 1 à 5), le commentaire
+
+Enfin nous comptons ajouter des filtres pour affiner la recherche si l’utilisateur le souhaite, il pourrait par exemple choisir un type de restaurant ou le prix etc…
+Pour cela nous comptons donc utiliser : l’API googleMaps (pour la localisation des restaurants ,la distance entre l’utilisateur et le restaurant, et la possibilité a terme d'afficher une carte precise de l'itineraire etc…).
+Les technologies utilisées pour le développement seront :
+1-Node Js pour la gestion du côté serveur, avec les modules express pour les vues et sqlite3 pour la gestion de la base de données et un module de cryptographie pour les données utilisateurs.
+2-HTML/CSS/JS pour le frontend avec une probable utilisation de framework tel que react js ou vue js.
+3-La gestion des RGPD se feront aussi 
+
+Pour l'affichage il y aura une page d'accueil avec le bouton pour qui propose le restaurant, les paramètres de recherche et un bouton pour se connecter, comme dit précédemment le site se voudra participatif, donc pour les utilisateurs ayant un compte il y aura une page avec un formulaire pour ajouter un restaurant.
+Lorsqu’un restaurant est proposé nous avons toute les informations de ce dernier, nous pouvons lui donner un like et laisser un commentaire
+Ainsi chaque fois qu’une personne ne saura pas ou manger, il aura juste a se rendre sur notre site, un restaurant lui sera ensuite proposé, résolvant ainsi le problème de l'indécision.
+
+Certaine des fonctionnalité que l'on avait envisagé n'ont pas etait implementer les raisons sont qu'aprés une reflexions plus poussé elles se sont revélées superficielles voir obsoletes et donc nous avons fait le choix de la simplicité. Nous avions une problematique et nous avons choisis d'allez a l'essentiel et de simplement resoudre au mieux le probleme qui etait devant nous.
+
+Un petit soucis a cependant persisté, dans une tentative de rendre notre site responsive, la nav bar changer en fonction de la taille de l'ecran (pc, telephone, tab), cependant nous avions reussis au debut a faire fontionner le bouton qui display les options qui ont ete caché via un script mais une fois le site fini nous avions remarqué que le bouton ne fonctionnait plus et impossible de le rendre foncitonnel.
+On a choisit de laisser le fait que la nav bar change malgré que ce ne soit pas fonctionnel a 100%.
+
+Enfin pour l'installation, il suffit normalement d'un simple "npm install" dans le terminal et tout est set-up dans le package pour facilité au maximum l'installation et une fois le serveur ouvert il suffit d'allez sur localhost:3000/, vous arriverez sur la page d'accuille du site.
+
+
+
