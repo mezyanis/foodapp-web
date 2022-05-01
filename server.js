@@ -53,7 +53,7 @@ app.get('/restaurant', (req, res) => {
 
 })
 
-app.get('/search', is_authenticated, (req, res) => {
+app.get('/search',  (req, res) => {
     let user_adress = req.query.adress
     let resto = model.random_restaurant()
 
