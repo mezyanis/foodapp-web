@@ -77,76 +77,80 @@
 </head>
 
 <body>
+<div class="body>
 <div class="information">
 
-    <div class="display name">
-        <h2>
-            <%= data.name %>
-        </h2>
-    </div>
+<div class="display name">
+    <h2>
+        <%= data.name %>
+    </h2>
+</div>
 
 
-    <div class="display adress">
-        <h2>
-            <%= data.adress %>
-        </h2>
-    </div>
-    <div class="display type">
-        <h2>
-            <%= data.type %>
-        </h2>
-    </div>
-    <div class=" display budget">
-        <h2>
-            <%= data.budget %>
-        </h2>
-    </div>
-    <div class=" display duration">
-        <h2>
-            <%= data.duration %> secondes
-        </h2>
-    </div>
+<div class="display adress">
+    <h2>
+        <%= data.adress %>
+    </h2>
+</div>
+<div class="display type">
+    <h2>
+        <%= data.type %>
+    </h2>
+</div>
+<div class=" display budget">
+    <h2>
+        <%= data.budget %>
+    </h2>
+</div>
+<div class=" display duration">
+    <h2>
+        <%= data.duration %> secondes
+    </h2>
+</div>
 
-    <div class="display distance">
-        <h2>
-            <%= data.distance %> metres</h2>
-        <div>
+<div class="display distance">
+    <h2>
+        <%= data.distance %> metres</h2>
+    <div>
     </div>
 </div>
 
 
 
-    <h3>
-        <ul>
-            <%data.comments.forEach(function(item,index){ %>
+<h3>
+    <ul>
+        <%data.comments.forEach(function(item,index){ %>
             <li>
                 <%= item.comment_content %>
             </li>
-            <% }) %>
-        </ul>
-    </h3>
+        <% }) %>
+    </ul>
+</h3>
 
 
-    <div class="container">
-        <div class="forms">
-            <div class="form login">
-                <form action="/comment" method="post">
-                    <div class="input-field">
-                        <input type="text" name="username" placeholder="Laisser un commentaire">
-                        <i class="uil uil-comment"></i>
-                    </div>
-                    <div class="checkbox">
-                        <input type="checkbox" name="like" id="like">
-                    </div>
+<div class="container">
+    <div class="forms">
+        <div class="form login">
+            <form action="/comment" method="post">
+                <div class="input-field">
+                    <input type="text" name="username" placeholder="Laisser un commentaire">
+                    <i class="uil uil-comment"></i>
+                </div>
+                <div class="checkbox">
+                    <input type="checkbox" name="like" id="like">
+                </div>
 
-                    <div class="input-field button">
-                        <input type="submit" value="Commentez !">
-                    </div>
-                </form>
-            </div>
+                <div class="input-field button">
+                    <input type="submit" value="Commentez !">
+                </div>
+            </form>
         </div>
     </div>
+</div>
 
 </div>
+
+</div>
+
 </body>
 </html>
