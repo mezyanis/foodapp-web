@@ -68,6 +68,9 @@ app.get('/search', is_authenticated, (req, res) => {
                 getGeoCode(resto.adress)
             ]);
 
+
+            console.log(resto.adress);
+
             let user_coord = user_data.results[0].location
             let resto_coord = resto_data.results[0].location
 
