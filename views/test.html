@@ -5,56 +5,81 @@
     <title>Title</title>
 
     <link rel="stylesheet" href="https://unicons.iconscout.com/release/v4.0.0/css/line.css">
-    <link rel="stylesheet" href="../static/form.css">
+    <link rel="stylesheet" href="../static/restaurant.css">
+
 </head>
 
 <body>
+<div class="information">
 
-<div class="container">
-    <div class="forms">
-        <div class="form login">
-            <span class="title">New Restaurant</span>
+    <div class="display name">
+        <h2>
+            <%= data.name %>
+        </h2>
+    </div>
 
-                <form action="/newRestaurant" method="post">
 
-                    <div class="input-field">
-                        <input type="text" name="name" id="name" placeholder="Nom du restaurant" required>
-                        <i class="uil uil-user"></i>
-                    </div>
-                    <div class="input-field">
-                        <input type="text" name="adress" id="adress" placeholder="Adresse" required>
-                        <i class="uil uil-home"></i>
-                    </div>
-                    <div class="input-field">
-                        <input id="zip" name="zip" type="text" pattern="[0-9]*" placeholder="Code postal" required>
-                        <i class="uil uil-postcard"></i>
-                    </div>
-                    <div class="input-field">
-                        <input type="text" name="ville" id="ville" placeholder="Ville" required>
-                        <i class="uil uil-map"></i>
-                    </div>
-                    <div class="input-field">
-                        <input type="text" name="type" id="type" placeholder="Type de restaurant" required>
-                        <i class="uil uil-filter"></i>
-                    </div>
+    <div class="display adress">
+        <h2>
+            <%= data.adress %>
+        </h2>
+    </div>
+    <div class="display type">
+        <h2>
+            <%= data.type %>
+        </h2>
+    </div>
+    <div class=" display budget">
+        <h2>
+            <%= data.budget %>
+        </h2>
+    </div>
+    <div class=" display duration">
+        <h2>
+            <%= data.duration %> seconde
+        </h2>
+    </div>
 
-                    <div class="input-field selector">
-                        <select name="budget">
-                            <option value="€"> -15€ le menu</option>
-                            <option value="€€">15-35€ le menu</option>
-                            <option value="€€€">+35 le menu</option>
-                        </select>
-                    </div>
+    <div class="display distance">
+        <h2>
+            <%= data.distance %> metres</h2>
+        <div>
+    </div>
+</div>
 
+
+
+    <h3>
+        <ul>
+            <%data.comments.forEach(function(item,index){ %>
+            <li>
+                <%= item.comment_content %>
+            </li>
+            <% }) %>
+        </ul>
+    </h3>
+
+
+    <div class="container">
+        <div class="forms">
+            <div class="form login">
+                <form action="/comment" method="post">
+                    <div class="input-field">
+                        <input type="text" name="username" placeholder="Laisser un commentaire">
+                        <i class="uil uil-comment"></i>
+                    </div>
+                    <div class="checkbox">
+                        <input type="checkbox" name="like" id="like">
+                    </div>
 
                     <div class="input-field button">
-                        <input type="submit" value="ajouter">
+                        <input type="submit" value="Commentez !">
                     </div>
-
-
                 </form>
+            </div>
         </div>
     </div>
+
 </div>
 </body>
 </html>
