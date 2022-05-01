@@ -69,8 +69,6 @@ app.get('/search', is_authenticated, (req, res) => {
             ]);
 
 
-            console.log(resto.adress);
-
             let user_coord = user_data.results[0].location
             let resto_coord = resto_data.results[0].location
 
@@ -88,13 +86,14 @@ app.get('/search', is_authenticated, (req, res) => {
             let res_distance = await fetch(api_distance, dist_options)
             let distance = await res_distance.json()
 
+
             restaurant_data = {
                 name: resto.name,
                 adress: resto.adress,
                 type: resto.type,
                 budget: resto.budget,
-                duration: (distance.durations[0][0] / 60),
-                distance: (distance.distances / 1000),
+                duration: secondsToHoursAndMinutes(distance.durations[0][0]),
+                distance: mettreToKiloMetre(distance.distances[0][0]),
                 comments: displayComments(resto.id)
             }
 
@@ -167,12 +166,9 @@ app.post('/comment', (req, res) => {
     let resto_id = model.get_restaurant(restaurant_data.name)
     let liked = req.body.like === 'on' ? 1 : 0
     model.comment(req.body.comment, liked, resto_id.id, req.session.id)
+    //console.log(req.body.comment);
     restaurant_data.comments = displayComments(resto_id.id)
     res.render('restaurant', { data: restaurant_data })
-
-
-
-
 
 })
 
@@ -221,9 +217,6 @@ let displayComments = (id) => {
     let req = model.get_comment(id)
     let comments = []
 
-    console.log('ahlil');
-    //console.log("req", req);
-
     for (let i = 0; i < req.length; i++) {
         comments.push({
             comment_content: req[i].comment,
@@ -249,5 +242,14 @@ let passwwordCrypt = (password) => {
 
 }
 
+const secondsToHoursAndMinutes = n => ({
+    hours: Math.floor(n / 3600),
+    minutes: Math.floor((n % 3600)/60)
+  });
+
+const mettreToKiloMetre = d => ({
+    km : Math.floor(d/1000),
+    m: d%1000
+})
 
 app.listen(3000, () => { console.log("server is running.."); })
