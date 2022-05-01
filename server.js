@@ -10,7 +10,7 @@ const model = require('./model')
 let app = express()
 
 let restaurant_data = {}
-    // parse form arguments in POST requests
+// parse form arguments in POST requests
 const bodyParser = require('body-parser');
 app.use(bodyParser.urlencoded({ extended: false }));
 
@@ -23,9 +23,7 @@ app.use(cookieSession({
 
 app.use(authenticatedView)
 
-//app.engine('html', mustache());
 app.set('view engine', 'ejs');
-//app.set('views', './views');
 
 
 
@@ -98,7 +96,6 @@ app.get('/search',  (req, res) => {
             }
 
 
-            //console.log(restaurant_data.comments);
             res.redirect('/restaurant')
 
         })()
@@ -166,7 +163,6 @@ app.post('/comment', (req, res) => {
     let resto_id = model.get_restaurant(restaurant_data.name)
     let liked = req.body.like === 'on' ? 1 : 0
     model.comment(req.body.comment, liked, resto_id.id, req.session.id)
-    //console.log(req.body.comment);
     restaurant_data.comments = displayComments(resto_id.id)
     res.render('restaurant', { data: restaurant_data })
 
@@ -194,8 +190,6 @@ function authenticatedView(req, res, next) {
         res.locals.authenticated = true
         res.locals.name = req.session.username
     }
-    //console.log('loc', res.locals);
-    //console.log('ses', req.session);
     next()
 }
 
@@ -224,8 +218,6 @@ let displayComments = (id) => {
         })
 
     }
-
-    //console.log("commetns", comments);
 
     return comments
 

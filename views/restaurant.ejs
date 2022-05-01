@@ -59,13 +59,15 @@
             <h3 class="com">
                 <ul>
                     <%data.comments.forEach(function(item,index){ %>
-                        <li>
+                        <li class="uni-comment">
                             <%= item.comment_content%>
-                        </li>
+                        
                         <% if (item.like === 1) { %>
                             <img src="like.png" alt="a aimé" width="20px" height="20px">
                         <% } %>
+                    </li>
                     <% }) %>
+
                 </ul>
             </h3>
         </div>
@@ -81,7 +83,7 @@
                         <i class="uil uil-comment"></i>
                     </div>
                     <div class="checkbox">
-                        <input type="checkbox" name="like" id="like">
+                        <h3>like</h3> <input label="like" type="checkbox" name="like" id="like" placeholder="like">
                     </div>
 
                     <div class="input-field button">

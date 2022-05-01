@@ -93,6 +93,8 @@
     padding: 20px;
 }
 
+
+
 .input-field i{
     position: absolute;
     top: 50%;
@@ -109,6 +111,12 @@
 
 .form .button{
     margin-top: 35px;
+}
+
+.uni-comment{
+    background-color: lightblue;
+    border-radius: 5px;
+    margin-top: 10px;
 }
 
 .form .button input{
