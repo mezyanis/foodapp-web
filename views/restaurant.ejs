@@ -1,102 +1,96 @@
 <%-include('navbar')-%>
 
 
-
-
-
     <link rel="stylesheet" href="https://unicons.iconscout.com/release/v4.0.0/css/line.css">
     <link rel="stylesheet" href="restaurant.css">
 
-</head>
-
-<body>
 <div class="body">
-<div class="information">
 
-<div class="display name">
-    <h2>
-        <%= data.name %>
-    </h2>
-</div>
+<div class="container info">
+    <div class="forms info">
+        <div class="display name">
+            <h2>
+                <%= data.name %>
+            </h2>
+        </div>
 
 
-<div class="display adress">
-    <h2>
-        <%= data.adress %>
-    </h2>
-</div>
-<div class="display type">
-    <h2>
-        <%= data.type %>
-    </h2>
-</div>
-<div class=" display budget">
-    <h2>
-        <%= data.budget %>
-    </h2>
-</div>
-<div class=" display duration">
-    <% if (data.duration.hours === 0) {%> 
-        <h2>
-            <%= data.duration.minutes %> min</h2>
-            <% }else{ %> 
+        <div class="display adress">
+            <h2>
+                <%= data.adress %>
+            </h2>
+        </div>
+        <div class="display type">
+            <h2>
+                <%= data.type %>
+            </h2>
+        </div>
+        <div class=" display budget">
+            <h2>
+                <%= data.budget %>
+            </h2>
+        </div>
+        <div class=" display duration">
+            <% if (data.duration.hours === 0) {%>
+                <h2>
+                    <%= data.duration.minutes %> min</h2>
+            <% }else{ %>
                 <h2>
                     <%= data.duration.hours %> h <%= data.duration.minutes %> min
                 </h2>
-                <% } %> 
-</div>
+            <% } %>
+        </div>
 
-<div class="display distance">
-    <% if (data.distance.km === 0) {%> 
-    <h2>
-        <%= data.distance.m %> m</h2>
-        <% }else{ %> 
-            <h2>
-                <%= data.distance.km %> , <%= data.distance.m %> km   
-            </h2>
-            <% } %> 
-    <div>
-    </div>
-</div>
-
-
-
-<h3>
-    <ul>
-        <%data.comments.forEach(function(item,index){ %>
-            <li>
-                <%= item.comment_content%>
-            </li>
-            <% if (item.like === 1) { %>
-                <img src="like.png" alt="a aimé" width="20px" height="20px">
-                <% } %> 
-            <% }) %>
-    </ul>
-</h3>
+        <div class="display distance">
+            <% if (data.distance.km === 0) {%>
+                <h2>
+                    <%= data.distance.m %> m</h2>
+            <% }else{ %>
+                <h2>
+                    <%= data.distance.km %> , <%= data.distance.m %> km
+                </h2>
+            <% } %>
+            <div>
+            </div>
+        </div>
 
 
-<div class="container">
-    <div class="forms">
-        <div class="form login">
-            <form action="/comment" method="post">
-                <div class="input-field">
-                    <input type="text" name="comment" placeholder="Laisser un commentaire">
-                    <i class="uil uil-comment"></i>
-                </div>
-                <div class="checkbox">
-                    <input type="checkbox" name="like" id="like">
-                </div>
-
-                <div class="input-field button">
-                    <input type="submit" value="Commentez !">
-                </div>
-            </form>
+        <div class="comment">
+            <h3 class="com">
+                <ul>
+                    <%data.comments.forEach(function(item,index){ %>
+                        <li>
+                            <%= item.comment_content%>
+                        </li>
+                        <% if (item.like === 1) { %>
+                            <img src="like.png" alt="a aimé" width="20px" height="20px">
+                        <% } %>
+                    <% }) %>
+                </ul>
+            </h3>
         </div>
     </div>
-</div>
 
 </div>
+    <div class="container com">
+        <div class="forms">
+            <div class="form login">
+                <form action="/comment" method="post">
+                    <div class="input-field">
+                        <input type="text" name="comment" placeholder="Laisser un commentaire">
+                        <i class="uil uil-comment"></i>
+                    </div>
+                    <div class="checkbox">
+                        <input type="checkbox" name="like" id="like">
+                    </div>
 
+                    <div class="input-field button">
+                        <input type="submit" value="Commentez !">
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
 </div>
 
 </body>
